@@ -1046,7 +1046,7 @@ function myBetterThrottle(callBackFn, delay) {
         let args = arguments;
         if(doCallFn) {
             callBackFn.apply(context, args);
-            delay = false;
+            doCallFn = false;
         }
         
         setTimeout(function() {
@@ -1162,3 +1162,223 @@ let obj2 = {
 }
 
 console.log(merge(obj1, obj2));
+
+
+// compare two arrays if they are equal return true else false
+function isArrayEqual(arr1, arr2) {
+    return JSON.stringify(arr1) === JSON.stringify(arr2);
+}
+
+let a = [1, 2, 3, 4, 5];
+let b = [1, 2, 3, 4, 5];
+
+console.log(isArrayEqual(a, b));
+
+// check if element is in viewport or not
+const isInViewport = function (elem) {
+     const bounding = elem.getBoundingClientRect();
+     return (
+       bounding.top >= 0 &&
+       bounding.left >= 0 &&
+       bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+       bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+};
+
+
+// output based questions
+var num = 8;
+var num = 10;
+console.log(num);
+// output is 10
+
+// output based questions
+for (let i = 1; i < 5; i++) {
+  if (i === 3) continue;
+  console.log(i);
+}
+// Answer — 1 2 4
+// Explanation —The continue statement skips an iteration if a certain condition returns true.
+
+
+// output based question
++true;
+!'Ayush';
+//Answer — 1 and false
+
+
+// output based question
+function sayHi() {
+  return (() => 0)();
+}
+
+console.log(typeof sayHi());
+//Answer — "number"
+
+
+// output based questions
+console.log(typeof typeof 1);
+// Answer —"string"
+
+
+// sum of n numbers
+
+function sumUnlimited(...args) {
+ return args.reduce((a,b) => a+b);
+ }
+ 
+ // ouput based questions
+ console.log('1' - - '1');
+console.log('1' + - '1');
+
+/**
+Answer —
+1. 2
+2. “1–1”
+*/
+
+// ouput based 
+console.log("ayushv.medium.com/" instanceof String);
+const s = new String('ayushv.medium.com/');
+console.log(s instanceof String);
+
+/**
+Answer —
+1. false
+2. true
+Explanation — Only strings defined with String() constructor are instance of it.
+*/
+
+
+// output based questions
+
+for(let i=0; i<3; i++) {
+	 setTimeout(function() { console.log(i)}, 1000);
+}
+
+// output - 0, 1, 2 
+
+// output based questions
+
+for(var i=0; i<3; i++) {
+	 setTimeout(function() { console.log(i)}, 1000);
+}
+
+// output - 3, 3, 3 
+
+
+// construction function prototypal inheritance example:
+function Employee(name, age, gender, id) {
+  this.name = name;
+  this.age = age;
+  this.gender = gender;
+  this.id = id;
+};
+
+function Developer(name, age, gender, id, specialization) {
+
+  // Calling Employee constructor function
+  Employee.call(this, name, age, gender, id);
+
+  // Adding a new parameter
+  this.specialization = specialization;
+}
+
+// Creating objects
+function Employee(name, age, gender, id) {
+  this.name = name;
+  this.age = age;
+  this.gender = gender;
+  this.id = id;
+};
+
+function Developer(name, age, gender, id, specialization) {
+
+  // Calling Employee constructor function
+  Employee.call(this, name, age, gender, id);
+
+  // Adding a new parameter
+  this.specialization = specialization;
+}
+
+// Creating objects
+let Employee1 = new Employee("Suraj", 28, "Male", 564);
+let Developer1 = new Developer("Karishma", 31, "Female", 345,
+  "Frontend Developer");
+console.log(Employee1);
+console.log(Developer1);
+
+
+/**
+ * 
+ * map format
+ * 
+ * arr.map((arrayItem, index, arr) => {})
+ * arr.filter((arrayItem, index, arr) => {})
+ * arr.reduce((accumulator, currentValue, index, arr) => {}, initialValue)
+ */
+
+// polyfill of map
+// arr.map((arrayItem, index,arr) => {})
+Array.prototype.myMap = function(callBackFn) {
+  let result =[];
+
+  for(let i=0; i<this.length; i++) {
+    result.push(callBackFn(this[i], i, this));
+  }
+
+  return result;
+}
+
+
+// filter polyfill
+// arr.filter((arrayItem, i, arr) => {})
+
+Array.prototype.filter =  function(callBackFn) {
+  let res = [];
+
+  if(callBackFn(this[i], i, this)) {
+    res.push(this[i]);
+  }
+
+  return res;
+}
+
+
+// reduce polyfill
+
+// arr.reduce((accumulator, currentValue, index, arr) => {}, initialValue)
+
+Array.prototype.myReduce = function(callBackFn, initialValue) {
+
+  let accumulator = initialValue;
+
+  for(let i=0; i<this.length; i++) {
+    accumulator = accumulator ? callBackFn(accumulator, this[i], i, this) : this[i];
+  }
+
+  return accumulator;
+}
+
+// private counter problem using closure
+
+function counter() {
+  var _counter = 0;
+
+  function add(inc) {
+    _counter = _counter + inc;
+  }
+
+  function retrive() {
+    return "Counter =" + _counter;
+  }
+
+  return {
+    add,
+    retrive
+  }
+}
+
+const cd = counter();
+cd.add(5);
+cd.retrive();
